@@ -7,10 +7,12 @@ import com.project.LibraryManagement.entity.Author;
 import com.project.LibraryManagement.entity.Book;
 import com.project.LibraryManagement.entity.Category;
 import com.project.LibraryManagement.entity.Publisher;
+import com.project.LibraryManagement.entity.Student;
 import com.project.LibraryManagement.vo.AuthorRecord;
 import com.project.LibraryManagement.vo.BookRecord;
 import com.project.LibraryManagement.vo.CategoryRecord;
 import com.project.LibraryManagement.vo.PublisherRecord;
+import com.project.LibraryManagement.vo.StudentRecord;
 
 public class Mapper {
 
@@ -37,6 +39,15 @@ public class Mapper {
 		return categories.stream().map(vo -> {
 			var categoryVo = new CategoryRecord(vo.getId(), vo.getName());
 			return categoryVo;
+		}).collect(Collectors.toList());
+
+	}
+	
+	public static List<StudentRecord> studentModelToVo(List<Student> students) {
+
+		return students.stream().map(vo -> {
+			var studentVo = new StudentRecord(vo.getId(), vo.getstudentName());
+			return studentVo;
 		}).collect(Collectors.toList());
 
 	}

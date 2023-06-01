@@ -20,10 +20,12 @@ import com.project.LibraryManagement.service.BookService;
 import com.project.LibraryManagement.service.CategoryService;
 import com.project.LibraryManagement.service.FileService;
 import com.project.LibraryManagement.service.PublisherService;
+import com.project.LibraryManagement.service.StudentService;
 import com.project.LibraryManagement.vo.AuthorRecord;
 import com.project.LibraryManagement.vo.BookRecord;
 import com.project.LibraryManagement.vo.CategoryRecord;
 import com.project.LibraryManagement.vo.PublisherRecord;
+import com.project.LibraryManagement.vo.StudentRecord;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -35,13 +37,15 @@ public class FileServiceImpl implements FileService {
 	final PublisherService publisherService;
 
 	final CategoryService categoryService;
+	final StudentService studentService;
 
 	public FileServiceImpl(BookService bookService, AuthorService authorService, PublisherService publisherService,
-			CategoryService categoryService) {
+			CategoryService categoryService , StudentService studentService) {
 		this.authorService = authorService;
 		this.categoryService = categoryService;
 		this.publisherService = publisherService;
 		this.bookService = bookService;
+		this.studentService= studentService;
 	}
 
 	@Override
@@ -68,6 +72,10 @@ public class FileServiceImpl implements FileService {
 		case PUBLISHER:
 			StatefulBeanToCsv<PublisherRecord> writer4 = getWriter(response.getWriter());
 			writer4.write(Mapper.publisherModelToVo(publisherService.findAllPublishers()));
+			break;
+		case STUDENT:
+			StatefulBeanToCsv<StudentRecord> writer5 = getWriter(response.getWriter());
+			writer5.write(Mapper.studentModelToVo(studentService.findAllStudents()));
 			break;
 		}
 

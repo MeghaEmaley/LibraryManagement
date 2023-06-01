@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 
 import com.project.LibraryManagement.entity.Author;
 import com.project.LibraryManagement.entity.Book;
@@ -36,11 +37,17 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+	
+	@Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+	
 	@Bean
 	public CommandLineRunner initialCreate() {
 		return (args) -> {
 
-			var book = new Book("123", "Spring core ", "abc78", "Book description");
+			var book = new Book("123", "Java ", "abc78", "Book description");
 			book.addAuthors(new Author("john", "dummy description"));
 			book.addCategories(new Category("Dummy categary"));
 			book.addPublishers(new Publisher("Dummy publisher"));
